@@ -22,7 +22,7 @@ EXPOSE 8501
 # RUN /usr/local/bin/python distribute_setup.py
 # RUN /usr/local/bin/python/easy_install pip
 
-RUN export PATH="$HOME/.local/bin:${PATH}"
+ENV PATH="$HOME/.local/bin:${PATH}"
 RUN /usr/local/bin/pip install --upgrade pip
 RUN /usr/local/bin/pip install -r /app/requirements.txt --upgrade --ignore-installed
 
