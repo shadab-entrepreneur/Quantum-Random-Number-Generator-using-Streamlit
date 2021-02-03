@@ -2,8 +2,7 @@ FROM mcr.microsoft.com/quantum/iqsharp-base:latest
 WORKDIR /app
 ADD . /app
 COPY . /app
-RUN dotnet tool install -g Microsoft.Quantum.IQSharp
-RUN dotnet iqsharp install
+
 
 # streamlit-specific commands
 RUN mkdir -p /app/.streamlit
