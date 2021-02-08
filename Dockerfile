@@ -3,6 +3,8 @@ WORKDIR /app
 ADD . /app
 COPY . /app
 
+ENV LC_ALL=C.UTF-8
+ENV LANG=C.UTF-8
 
 # streamlit-specific commands
 RUN mkdir -p /app/.streamlit
@@ -18,12 +20,10 @@ enableCORS = false\n\
 
 # exposing default port for streamlit
 EXPOSE 8501
-# RUN curl -O https://svn.apache.org/repos/asf/oodt/tools/oodtsite.publisher/trunk/distribute_setup.py
-# RUN /usr/local/bin/python distribute_setup.py
-# RUN /usr/local/bin/python/easy_install pip
 
-ENV PATH="$HOME/.local/bin:${PATH}"
-RUN /usr/local/bin/pip install --upgrade pip
-RUN /usr/local/bin/pip install -r /app/requirements.txt --upgrade --ignore-installed
-
-CMD ["streamlit", "run", "qrng_final.py"]
+RUN pip3 install --upgrade pip
+RUN pip3 install --upgrade setuptools
+RUN pip3 install -r /app/requirements.txt
+COPY . .
+RUN export PATH="$HOME/.local/bin:${PATH}"
+CMD python -m streamlit run qrng_final.py --server.enableCORS false
