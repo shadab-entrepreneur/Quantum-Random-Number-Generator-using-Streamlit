@@ -1,4 +1,5 @@
-FROM mcr.microsoft.com/quantum/iqsharp-base:latest
+# FROM mcr.microsoft.com/quantum/iqsharp-base:latest
+FROM mcr.microsoft.com/quantum/iqsharp-base:0.15.2101125897
 USER root
 WORKDIR /app
 ADD . /app

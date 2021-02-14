@@ -86,14 +86,15 @@ def anu_generator(n, data_type):
 
 
 if quantum_computer == "IBMQ" or quantum_computer == "Microsoft (Q#)":
-    if quantum_computer == "IBMQ":
+    if quantum_computer == "IBMQ": 
+        api_key = None
         try:
             IBMQ.load_account()
         except Exception as e:
-            st.write(e)
             api_key = st.sidebar.text_input("Enter IBMQ API Key")
-            IBMQ.save_account(api_key)
-            IBMQ.load_account()
+            if api_key != None:
+                IBMQ.save_account(api_key, overwrite=True)
+                IBMQ.load_account()          
         provider = IBMQ.get_provider(hub='ibm-q')
         device = st.sidebar.selectbox("Select Quantum Device", [str(each) for each in provider.backends()])
         backend = provider.get_backend(device)
